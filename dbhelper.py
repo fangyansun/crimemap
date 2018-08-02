@@ -16,7 +16,7 @@ class DBHelper:
 				cursor.execute(query)
 			return cursor.fetchall()
 		finally:
-			cursoronnection.close()
+			connection.close()
 
 	def add_input(self, data):
 		connection = self.connect()
