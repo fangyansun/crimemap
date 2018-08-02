@@ -2,10 +2,11 @@ from dbhelper import DBHelper
 from flask import Flask
 from flask import render_template
 from flask import request
+
 app = Flask(__name__)
 DB = DBHelper()
-@app.route("/")
 
+@app.route("/")
 def home():
 	try:
 		data = DB.get_all_inputs()
