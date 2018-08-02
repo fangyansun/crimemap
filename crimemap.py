@@ -6,7 +6,7 @@ from flask import request
 app = Flask(__name__)
 DB = DBHelper()
 
-@app.route("crimemap1/")
+@app.route("/crimemap1/")
 def home():
 	try:
 		data = DB.get_all_inputs()
@@ -15,7 +15,7 @@ def home():
 		data = None
 	return render_template("home.html", data=data)
 
-@app.route("crimemap1/add", methods=["POST"])
+@app.route("/crimemap1/add", methods=["POST"])
 def add():
 	try:
 		data = request.form.get("userinput")
@@ -24,7 +24,7 @@ def add():
 		print e
 	return home()
 
-@app.route("crimemap1/clear")
+@app.route("/crimemap1/clear")
 def clear():
 	try:
 		DB.clear_all()
