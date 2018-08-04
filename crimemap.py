@@ -6,6 +6,7 @@ else:
 	from dbhelper import DBHelper
 	route_prefix = "/crimemap1"
 from flask import Flask
+import json
 from flask import render_template
 from flask import request
 
@@ -15,11 +16,12 @@ DB = DBHelper()
 @app.route("/")
 def home():
 	try:
-		data = DB.get_all_inputs()
+		crimes = DB.get_all_crimes()
+		crimes = json.dumps(crimes)
 	except Exception as e:
 		print e
 		data = None
-	return render_template("home.html", data=data, route_prefix = route_prefix)
+	return render_template("home.html", crimes = crimes, route_prefix = route_prefix)
 
 @app.route("/add", methods=["POST"])
 def add():
