@@ -1,4 +1,10 @@
-from dbhelper import DBHelper
+import dbconfig
+if dbconfig.test:
+	from mockdbhelper import MockDBHelper as DBHelper
+	route_prefix = ""
+else:
+	from dbhelper import DBHelper
+	route_prefix = "/crimemap1"
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -13,7 +19,7 @@ def home():
 	except Exception as e:
 		print e
 		data = None
-	return render_template("home.html", data=data)
+	return render_template("home.html", data=data, route_prefix = route_prefix)
 
 @app.route("/add", methods=["POST"])
 def add():
